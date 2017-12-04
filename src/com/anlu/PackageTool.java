@@ -11,9 +11,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FreePatchUtil {
-	public static String patchFile = "D:/patch.txt";// 补丁文件,由eclipse svn
-													// plugin生成
+public class PackageTool {
+	public static String patchFile = "D:/changeLog.txt";// 补丁文件,由eclipse svn
+	// plugin生成
+	public static String pathPrefix = "M /06国网电商项目/02开发区/04实现/01代码/trunk/code/cgjy/";
 
 	public static String projectPath = "E:/Project/ztbProject";// 项目文件夹路径
 
@@ -22,7 +23,7 @@ public class FreePatchUtil {
 	public static String resourceContent = "src/main/resources"; // 配置文件路径前缀
 
 	public static String classPath = "E:/Project/ztbProject/target/classes";// class存放路径
-	public static String resourcePath= "E:/Project/ztbProject/target/m2e-wtp/web-resources/WEB-INF/classes";//resource的存放路径
+	public static String resourcePath = "E:/Project/ztbProject/target/m2e-wtp/web-resources/WEB-INF/classes";// resource的存放路径
 
 	public static String desPath = "D:/update_pkg";// 补丁文件包存放路径
 
@@ -37,14 +38,17 @@ public class FreePatchUtil {
 	}
 
 	public static List<String> getPatchFileList() throws Exception {
+		  String encoding="UTF-8"; 
 		List<String> fileList = new ArrayList<String>();
 		FileInputStream f = new FileInputStream(patchFile);
 		BufferedReader dr = new BufferedReader(
-				new InputStreamReader(f, "utf-8"));
+				new InputStreamReader(f, encoding));
 		String line;
 		while ((line = dr.readLine()) != null) {
-			if (line.indexOf("Index:") != -1) {
-				line = line.replaceAll(" ", "");
+			if (line.indexOf(pathPrefix) != -1) {
+				line = line.replaceAll(pathPrefix, "");
+				line = line.trim();
+				line = line.replace(" ", "");
 				line = line.substring(line.indexOf(":") + 1, line.length());
 				fileList.add(line);
 			}
@@ -74,7 +78,7 @@ public class FreePatchUtil {
 				}
 				copyFile(fullFileName, desFileNameStr);
 				System.out.println(fullFileName + "复制完成");
-			} else if (fullFileName.indexOf(resourceContent) != -1) {//如果是配置文件
+			} else if (fullFileName.indexOf(resourceContent) != -1) {// 如果是配置文件
 				String fileName = fullFileName.replace(resourceContent, "");
 				fullFileName = resourcePath + fileName;
 				String tempDesPath = fileName.substring(0,
@@ -88,7 +92,7 @@ public class FreePatchUtil {
 					desFilePath.mkdirs();
 				}
 				copyFile(fullFileName, desFileNameStr);
-				System.out.println("配置文件:"+fullFileName + "复制完成");
+				System.out.println("配置文件:" + fullFileName + "复制完成");
 			} else {// 对普通目录的处理 普通目录包含静态jsp文件,js,css图片等，也包括配置文件
 				String desFileName = fullFileName.replaceAll(webContent, "");
 				fullFileName = projectPath + "/" + fullFileName;// 将要复制的文件全路径
