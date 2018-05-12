@@ -11,25 +11,25 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FreePatchUtil {
+public class TrunkFreePatchUtil {
 	public static String patchFile = "D:/changeLog.txt";// 补丁文件,由eclipse svn
 	// plugin生成
-	public static String pathPrefix = "M /06国网电商项目/02开发区/04实现/01代码/trunk/code/cgjy/";
-	public static String ApathPrefixString = "A /06国网电商项目/02开发区/04实现/01代码/trunk/code/cgjy";
+	public static String pathPrefix = "M /cgjy/trunk/ztbProject/";
+	public static String ApathPrefixString = "A /cgjy/trunk/ztbProject";
 
-	public static String projectPath = "E:/Project/ztbProject";// 项目文件夹路径
+	public static String projectPath = "E:/svn/runDongSVN/cgjy/trunk/ztbProject";// 项目文件夹路径
 
 	public static String webContent = "src/main/webapp";// web应用文件前缀
 	public static String classContent = "src/main/java";// class文件路径前缀
 	public static String resourceContent = "src/main/resources"; // 配置文件路径前缀
 	public static String sqlContent = "src/main/sql";//sql文件的前缀
 
-	public static String classPath = "E:/Project/ztbProject/target/classes";// class存放路径
-	public static String resourcePath = "E:/Project/ztbProject/target/m2e-wtp/web-resources/WEB-INF/classes";// resource的存放路径
+	public static String classPath = "E:/svn/runDongSVN/cgjy/trunk/ztbProject/target/classes";// class存放路径
+	public static String resourcePath = "E:/svn/runDongSVN/cgjy/trunk/ztbProject/target/m2e-wtp/web-resources/WEB-INF/classes";// resource的存放路径
 
 	public static String desPath = "D:/update_pkg";// 补丁文件包存放路径
 
-	public static String version = "cgjy_20180425";// 补丁版本
+	public static String version = "cgjy_20180510_2017";// 补丁版本
 
 	/**
 	 * @param args
